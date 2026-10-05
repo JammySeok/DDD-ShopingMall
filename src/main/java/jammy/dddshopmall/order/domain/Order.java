@@ -65,6 +65,12 @@ public class Order {
         this.state = OrderState.PREPARING;
     }
 
+    public void ship() {
+
+        if (!state.isPreparing()) throw new IllegalStateException("상품 준비중이 아닙니다.");
+        this.state = OrderState.SHIPPED;
+    }
+
     public void cancel() {
 
         verifyNotCanceled();

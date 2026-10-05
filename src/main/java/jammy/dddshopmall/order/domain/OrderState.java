@@ -15,4 +15,7 @@ public enum OrderState {
     public boolean isCanceled() {
         return this == CANCELED;
     }
+    public boolean isPreparing() {
+        return this == PREPARING;
+    }
 }
