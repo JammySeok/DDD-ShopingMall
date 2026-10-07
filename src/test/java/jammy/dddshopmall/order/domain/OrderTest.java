@@ -90,6 +90,30 @@ class OrderTest {
     }
 
     @Test
+    void 비어있는_주문자() {
+        assertThatThrownBy(() -> Order.create(
+                OrderNo.of(UUID.randomUUID().toString()),
+                null,
+                List.of(
+                        new OrderLine(
+                                new ProductId(UUID.randomUUID().toString()),
+                                new Money(10000),
+                                4
+                        ),
+                        new OrderLine(
+                                new ProductId(UUID.randomUUID().toString()),
+                                new Money(20000),
+                                2
+                        )
+                ),
+                new ShippingInfo(
+                        new Receiver("홍길동", "010-1111-2222"),
+                        new Address("12312", "가나다라", "")
+                ))
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     void 비어있는_배송항목() {
         assertThatThrownBy(() -> Order.create(
                 OrderNo.of(UUID.randomUUID().toString()),
@@ -178,6 +202,15 @@ class OrderTest {
     /**
      * VO 테스트
      */
+    @Test
+    void Orderer_비어있는값() {
+
+        assertThatThrownBy(() -> new Orderer(
+                new MemberId(UUID.randomUUID().toString()),
+                null
+        )).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @Test
     void OrderLine_금액계산() {
 
