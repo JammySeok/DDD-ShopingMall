@@ -1,6 +1,6 @@
 package jammy.dddshopmall.order.domain;
 
-import jammy.dddshopmall.catalog.domain.ProductId;
+import jammy.dddshopmall.catalog.domain.product.ProductId;
 import jammy.dddshopmall.common.model.Money;
 
 // VO(Value Object)

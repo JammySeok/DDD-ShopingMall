@@ -9,27 +9,24 @@ public class Order {
 
     // 주문 정보
     private OrderNo number;
+    private Orderer orderer;
     private List<OrderLine> orderLines;
     private Money totalAmount;
     private ShippingInfo shippingInfo;
     private OrderState state;
 
-    // 외부 new 방지
     private Order(
             OrderNo number,
+            Orderer orderer,
             List<OrderLine> orderLines,
             ShippingInfo shippingInfo
     ) {
 
-        if (number == null ||shippingInfo == null) {
-            throw new IllegalArgumentException("주문번호, 배송정보는 필수입니다.");
-        }
-
-        if (orderLines == null || orderLines.isEmpty()) {
-            throw new IllegalArgumentException("상품정보는 필수입니다.");
-        }
+        if (number == null || orderer == null || shippingInfo == null) throw new IllegalArgumentException("주문번호, 주문자, 배송정보는 필수입니다.");
+        if (orderLines == null || orderLines.isEmpty()) throw new IllegalArgumentException("상품정보는 필수입니다.");
 
         this.number = number;
+        this.orderer = orderer;
         this.orderLines = List.copyOf(orderLines);
         this.totalAmount = calculateTotalAmount(this.orderLines);
         this.shippingInfo = shippingInfo;
@@ -39,10 +36,11 @@ public class Order {
     // 주문 생성
     public static Order create(
             OrderNo number,
+            Orderer orderer,
             List<OrderLine> orderLines,
             ShippingInfo shippingInfo
     ) {
-        return new Order(number, orderLines, shippingInfo);
+        return new Order(number, orderer, orderLines, shippingInfo);
     }
 
 
@@ -50,6 +48,7 @@ public class Order {
      * Getter
      */
     public OrderNo getNumber() { return number; }
+    public Orderer getOrderer() { return orderer; }
     public List<OrderLine> getOrderLines() { return orderLines; }
     public Money getTotalAmount() { return totalAmount; }
     public ShippingInfo getShippingInfo() { return shippingInfo; }

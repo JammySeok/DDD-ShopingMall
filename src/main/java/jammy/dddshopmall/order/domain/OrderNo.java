@@ -6,7 +6,7 @@ public record OrderNo(
 ) {
 
     public OrderNo {
-        if (number == null || number.isBlank()) { throw new IllegalArgumentException("주문번호는 필수입니다."); }
+        if (number == null || number.isBlank()) throw new IllegalArgumentException("주문번호는 필수입니다.");
     }
 
     public static OrderNo of(String number) {

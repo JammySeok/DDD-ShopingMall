@@ -1,8 +1,9 @@
 package jammy.dddshopmall.order.domain;
 
-import jammy.dddshopmall.catalog.domain.ProductId;
+import jammy.dddshopmall.catalog.domain.product.ProductId;
 import jammy.dddshopmall.common.model.Address;
 import jammy.dddshopmall.common.model.Money;
+import jammy.dddshopmall.member.domain.MemberId;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -76,6 +77,10 @@ class OrderTest {
     void 비어있는_주문항목() {
         assertThatThrownBy(() -> Order.create(
                 OrderNo.of(UUID.randomUUID().toString()),
+                new Orderer(
+                        new MemberId(UUID.randomUUID().toString()),
+                        "홍길동"
+                ),
                 List.of(),  // 빈 값
                 new ShippingInfo(
                         new Receiver("홍길동", "010-1111-2222"),
@@ -88,6 +93,10 @@ class OrderTest {
     void 비어있는_배송항목() {
         assertThatThrownBy(() -> Order.create(
                 OrderNo.of(UUID.randomUUID().toString()),
+                new Orderer(
+                        new MemberId(UUID.randomUUID().toString()),
+                        "홍길동"
+                ),
                 List.of(
                         new OrderLine(
                                 new ProductId(UUID.randomUUID().toString()),
@@ -216,6 +225,10 @@ class OrderTest {
     private Order createOrder() {
         return Order.create(
                 OrderNo.of(UUID.randomUUID().toString()),
+                new Orderer(
+                        new MemberId(UUID.randomUUID().toString()),
+                        "홍길동"
+                ),
                 List.of(
                         new OrderLine(
                                 new ProductId(UUID.randomUUID().toString()),

@@ -1,4 +1,4 @@
-package jammy.dddshopmall.catalog.domain;
+package jammy.dddshopmall.catalog.domain.product;
 
 // VO(Value Object)
 public record ProductId (
